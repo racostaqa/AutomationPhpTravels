@@ -47,24 +47,24 @@ class CreateCustomerTest(EnvironmentSetup):
         # self.assertTrue(is_login_page_loaded and is_home_page_loaded, "Login Page or Home page couldn't be loaded")
         print("Login successful")
 
-    def test_02_create_customer(self):
-        # Browse to Create customer page
-        home_page = HomePage(self.driver)
-        home_page.click_accounts()
-        sleep(3)
-        home_page.click_customers()
-        sleep(2)
-
-        # verify Customer page is displayed
-
-        # fill required fields, ect...
-
-        # submit form
-
-        # assert
-
-        # Test completed
-        print("Test completed")
+    # def test_02_create_customer(self):
+    #     # Browse to Create customer page
+    #     home_page = HomePage(self.driver)
+    #     home_page.click_accounts()
+    #     sleep(3)
+    #     home_page.click_customers()
+    #     sleep(2)
+    #
+    #     # verify Customer page is displayed
+    #
+    #     # fill required fields, ect...
+    #
+    #     # submit form
+    #
+    #     # assert
+    #
+    #     # Test completed
+    #     print("Test completed")
 
 
 if __name__ == '__main__':
