@@ -8,21 +8,24 @@ from Data.Data import Data
 
 class EnvironmentSetup(unittest.TestCase):
 
+    driver = None
+
     # setUP contains the browser setup attributes
-    def setUp(self):
-        self.driver = webdriver.Chrome(Data.CHROME_DRIVER_ADDRESS)
-        print("Run Started at :"+str(datetime.datetime.now()))
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Chrome(Data.CHROME_DRIVER_ADDRESS)
+        print("Run Started at :" + str(datetime.datetime.now()))
         print("\n\n------------------------------------------------------------------")
         print("Chrome Environment Set Up\n")
-        self.driver.implicitly_wait(20)
-        self.driver.maximize_window()
+        cls.driver.implicitly_wait(20)
+        cls.driver.set_page_load_timeout(20)
 
     # tearDown method just to close all the browser instances and then quit
-
-    # def tearDown(self):
-    #     if self.driver is not None:
-    #         print("\nTest Environment Destroyed")
-    #         print("----------------------------------------------------------")
-    #         print("Run Completed at: " + str(datetime.datetime.now()))
-    #         self.tearDown()
-    #         self.driver.quit()
+    @classmethod
+    def tearDownClass(cls):
+        if cls.driver is not None:
+            print("------------------------------------------------------------------")
+            print("Test Environment Destroyed")
+            print("Run Completed at :" + str(datetime.datetime.now()))
+            cls.driver.close()
+            cls.driver.quit()

@@ -14,13 +14,7 @@ import unittest
 
 class LoginTest(EnvironmentSetup):
 
-    def test_set_up(self):
-        # browser set up
-        # self.setUp()
-        self.driver.get(Data.PHP_TRAVELS_WEB_ADDRESS)
-        self.driver.set_page_load_timeout(20)
-
-    def test_login(self):
+    def test_01_login(self):
 
         # Screen shots
         # screen_shot_path = Data.LOGIN_SCREEN_SHOTS_PATH
@@ -28,6 +22,8 @@ class LoginTest(EnvironmentSetup):
         # try:
         # -------------------
         # calling Google home page
+        self.driver.get(Data.PHP_TRAVELS_WEB_ADDRESS)
+        self.driver.maximize_window()
         login_page = LoginPage(self.driver)
 
         # waiting for Title element to be present
@@ -42,7 +38,10 @@ class LoginTest(EnvironmentSetup):
         login_page.fill_email(Data.LOGIN_ADMIN_EMAIL)
         login_page.fill_password(Data.LOGIN_VALID_PASSWORD)
 
+    def test_02_login(self):
+
         # clicking on submit button
+        login_page = LoginPage(self.driver)
         login_page.submit()
         sleep(3)
         print("Login in process...")

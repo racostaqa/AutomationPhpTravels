@@ -11,6 +11,9 @@ class Locators(object):
 
     # Home page
     home_title_x = "//strong[contains(string(), 'Dashboard')]"
-    home_accounts_css = "ul[id='ACCOUNTS']"
-    home_customers_css = "a[href='https://www.phptravels.net/admin/accounts/customers/']"
+    # home_accounts_x = "ul[id='ACCOUNTS']"
+    # home_accounts_x = "#ACCOUNTS"
+    # home_customers_css = "a[href='https://www.phptravels.net/admin/accounts/customers/']"
+    home_accounts_x = "//ul[@id='ACCOUNTS']/.."
+    home_customers_css = "[href$='/customers/']"
 

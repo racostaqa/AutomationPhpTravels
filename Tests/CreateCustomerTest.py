@@ -8,24 +8,22 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from Data.Data import Data
-from time import sleep
 import unittest
 
 
 class CreateCustomerTest(EnvironmentSetup):
 
     def test_01_login(self):
-        # Using the driver instances created in EnvironmentSetup
-        driver = self.driver
-        self.driver.get(Data.PHP_TRAVELS_WEB_ADDRESS)
-        self.driver.set_page_load_timeout(20)
 
-        # calling Google home page
-        login_page = LoginPage(driver)
+        print("Navigating to Login Page")
+        self.driver.get(Data.PHP_TRAVELS_WEB_ADDRESS)
+        self.driver.maximize_window()
 
         # waiting for Title element to be present
-        title_element = WebDriverWait(driver, 20).until(
+        title_element = WebDriverWait(self.driver, 20).until(
             ec.element_to_be_clickable((By.XPATH, Locators.login_title_x)))
+
+        login_page = LoginPage(self.driver)
         login_page.set_title(title_element)
 
         # is_login_page_loaded = login_page.get_title().is_displayed()
@@ -35,36 +33,42 @@ class CreateCustomerTest(EnvironmentSetup):
         # entering credentials
         login_page.fill_email(Data.LOGIN_ADMIN_EMAIL)
         login_page.fill_password(Data.LOGIN_VALID_PASSWORD)
+        print("Username and password entered")
 
         # clicking on submit button
         login_page.submit()
-        sleep(3)
         print("Login in process...")
-        # verifying Login
-        home_page = HomePage(driver)
+
+    def test_02_create_customer(self):
+        home_page = HomePage(self.driver)
         # is_home_page_loaded = home_page.get_title().is_displayed()
         self.assertTrue(home_page.get_title().is_displayed())
         # self.assertTrue(is_login_page_loaded and is_home_page_loaded, "Login Page or Home page couldn't be loaded")
         print("Login successful")
+        print("Home page is displayed")
 
-    # def test_02_create_customer(self):
-    #     # Browse to Create customer page
-    #     home_page = HomePage(self.driver)
-    #     home_page.click_accounts()
-    #     sleep(3)
-    #     home_page.click_customers()
-    #     sleep(2)
-    #
-    #     # verify Customer page is displayed
-    #
-    #     # fill required fields, ect...
-    #
-    #     # submit form
-    #
-    #     # assert
-    #
-    #     # Test completed
-    #     print("Test completed")
+        # Browse to Create customer page
+        print("Navigating to Create Customer page")
+
+        home_page.click_accounts()
+
+        # waiting for Customers element to be enable
+        customers_element = WebDriverWait(self.driver, 20).until(
+            ec.visibility_of_element_located((By.CSS_SELECTOR, Locators.home_customers_css)))
+        home_page.set_customers(customers_element)
+
+        home_page.click_customers()
+
+        # verify Customer page is displayed
+
+        # fill required fields, ect...
+
+        # submit form
+
+        # assert
+
+        # Test completed
+        print("Test completed")
 
 
 if __name__ == '__main__':
