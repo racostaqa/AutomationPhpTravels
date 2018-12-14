@@ -2,6 +2,8 @@ __author__ = 'Ricardo'
 
 from Pages.LoginPage import LoginPage
 from Pages.HomePage import HomePage
+from Pages.CustomerPage import CustomerPage
+from Pages.AddCustomerPage import AddCustomerPage
 from General.Locators import Locators
 from General.EnvironmentSetUp import EnvironmentSetup
 from selenium.webdriver.common.by import By
@@ -15,7 +17,7 @@ class CreateCustomerTest(EnvironmentSetup):
 
     def test_01_login(self):
 
-        print("Navigating to Login Page")
+        print("Navigating to Login Page...")
         self.driver.get(Data.PHP_TRAVELS_WEB_ADDRESS)
         self.driver.maximize_window()
 
@@ -39,16 +41,21 @@ class CreateCustomerTest(EnvironmentSetup):
         login_page.submit()
         print("Login in process...")
 
-    def test_02_create_customer(self):
         home_page = HomePage(self.driver)
         # is_home_page_loaded = home_page.get_title().is_displayed()
         self.assertTrue(home_page.get_title().is_displayed())
         # self.assertTrue(is_login_page_loaded and is_home_page_loaded, "Login Page or Home page couldn't be loaded")
         print("Login successful")
+
+    def test_02_navigate_to_add_customer_page(self):
+        home_page = HomePage(self.driver)
+        # is_home_page_loaded = home_page.get_title().is_displayed()
+        self.assertTrue(home_page.get_title().is_displayed())
+        # self.assertTrue(is_login_page_loaded and is_home_page_loaded, "Login Page or Home page couldn't be loaded")
         print("Home page is displayed")
 
         # Browse to Create customer page
-        print("Navigating to Create Customer page")
+        print("Navigating to Add Customer page")
 
         home_page.click_accounts()
 
@@ -59,13 +66,60 @@ class CreateCustomerTest(EnvironmentSetup):
 
         home_page.click_customers()
 
-        # verify Customer page is displayed
+        customers_page = CustomerPage(self.driver)
 
-        # fill required fields, ect...
+        # waiting for Customers Management page to be enable
+        customers_title_element = WebDriverWait(self.driver, 20).until(
+            ec.presence_of_element_located((By.XPATH, Locators.customers_title_x)))
+        customers_page.set_customers_title(customers_title_element)
+
+        # verify Customer page is displayed
+        self.assertTrue(customers_page.get_customers_title().is_displayed())
+        print("Customers Management page is displayed")
+
+        # go to add customers page
+        customers_page.click_add_customers_button()
+
+        add_customers_page = AddCustomerPage(self.driver)
+        # waiting for Add Customers page to be enable
+        add_customers_title_element = WebDriverWait(self.driver, 20).until(
+            ec.visibility_of_element_located((By.XPATH, Locators.add_customers_title_x)))
+        add_customers_page.set_add_customers_title(add_customers_title_element)
+
+        # verify Add Customers page is displayed
+        self.assertTrue(add_customers_page.get_add_customers_title().is_displayed())
+        print("Add Customers page is displayed")
+
+    def test_03_fill_inputs(self):
+        # fill required fields
+        add_customers_page = AddCustomerPage(self.driver)
+        add_customers_page.fill_first_name(Data.CUSTOMER_FIRST_NAME)
+        add_customers_page.fill_last_name(Data.CUSTOMER_LAST_NAME)
+        add_customers_page.fill_email(Data.CUSTOMER_EMAIL)
+        add_customers_page.fill_password(Data.CUSTOMER_PASSWORD)
+        add_customers_page.fill_mobile(Data.CUSTOMER_MOBILE_NUMBER)
+        add_customers_page.click_country_dropdown()
+        add_customers_page.fill_country_input(Data.CUSTOMER_COUNTRY)
+        add_customers_page.enter_country_input()
+        add_customers_page.fill_address_1(Data.CUSTOMER_ADDRESS_1)
+        add_customers_page.fill_address_2(Data.CUSTOMER_ADDRESS_2)
+        add_customers_page.click_subscribe_checkbox()
 
         # submit form
+        add_customers_page.click_submit_button()
 
-        # assert
+    def test_04_check_created_user(self):
+        customer_page = CustomerPage(self.driver)
+        # waiting for Customers Page to be enable
+        customers_title_element = WebDriverWait(self.driver, 20).until(
+            ec.visibility_of_element_located((By.XPATH, Locators.customers_title_x)))
+        customer_page.set_customers_title(customers_title_element)
+        # verify User was created
+        self.assertTrue(customer_page.get_customers_title().is_displayed())
+        print("Customers Management page is displayed again")
+
+        self.assertTrue(customer_page.get_created_customer(Data.CUSTOMER_EMAIL).is_displayed())
+        print("Customer " + Data.CUSTOMER_FIRST_NAME + " " + Data.CUSTOMER_LAST_NAME + " added successfully")
 
         # Test completed
         print("Test completed")

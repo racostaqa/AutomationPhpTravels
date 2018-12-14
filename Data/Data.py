@@ -16,13 +16,14 @@ class Data(object):
     LOGIN_INVALID_PASSWORD = "invalid-password"
 
     # Php Travels Add Customer Test
-    FIRST_NAME = "Lolo"
-    LAST_NAME = "Mora"
-    EMAIL = "lmora@phptravels.com"
-    PASSWORD = "lolo123456"
-    MOBILE_NUMBER = "88888888"
-    ADDRESS_1 = "Cartago"
-    ADDRESS_2 = "El Guarco"
+    CUSTOMER_FIRST_NAME = "Lolo"
+    CUSTOMER_LAST_NAME = "Mora"
+    CUSTOMER_EMAIL = "lmora@phptravels.com"
+    CUSTOMER_PASSWORD = "lolo123456"
+    CUSTOMER_MOBILE_NUMBER = "88888888"
+    CUSTOMER_COUNTRY = "Costa Rica"
+    CUSTOMER_ADDRESS_1 = "Cartago"
+    CUSTOMER_ADDRESS_2 = "El Guarco"
 
 
 
