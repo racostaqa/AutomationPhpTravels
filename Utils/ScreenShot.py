@@ -10,3 +10,4 @@ class ScreenShot(object):
     def take_screen_shot(self, path):
         directory = Data.SCREEN_SHOTS_DIRECTORY
         self.driver.get_screenshot_as_file(directory+path)
+

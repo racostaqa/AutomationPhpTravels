@@ -31,3 +31,4 @@ class CustomerPage(object):
     def get_created_customer(self, email):
         element = Locators.customer_created.format(email)
         return self.driver.find_element(By.XPATH, element)
+

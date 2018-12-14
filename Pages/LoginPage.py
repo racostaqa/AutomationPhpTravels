@@ -38,3 +38,4 @@ class LoginPage(object):
 
     def set_button(self, web_element):
         self.button = web_element
+

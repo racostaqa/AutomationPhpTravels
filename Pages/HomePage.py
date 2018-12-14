@@ -31,3 +31,4 @@ class HomePage(object):
 
     def set_customers(self, web_element):
         self.customers = web_element
+

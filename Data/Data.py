@@ -24,7 +24,3 @@ class Data(object):
     CUSTOMER_COUNTRY = "Costa Rica"
     CUSTOMER_ADDRESS_1 = "Cartago"
     CUSTOMER_ADDRESS_2 = "El Guarco"
-
-
-
-

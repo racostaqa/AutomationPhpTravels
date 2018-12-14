@@ -41,6 +41,7 @@ class LoginTest(EnvironmentSetup):
     def test_02_login(self):
 
         # clicking on submit button
+
         login_page = LoginPage(self.driver)
         login_page.submit()
         sleep(3)

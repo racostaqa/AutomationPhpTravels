@@ -10,7 +10,7 @@ class EnvironmentSetup(unittest.TestCase):
 
     driver = None
 
-    # setUP contains the browser setup attributes
+    # contains the browser setup attributes
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Chrome(Data.CHROME_DRIVER_ADDRESS)
@@ -20,7 +20,7 @@ class EnvironmentSetup(unittest.TestCase):
         cls.driver.implicitly_wait(20)
         cls.driver.set_page_load_timeout(20)
 
-    # tearDown method just to close all the browser instances and then quit
+    # method just to close all the browser instances and then quit
     @classmethod
     def tearDownClass(cls):
         if cls.driver is not None:

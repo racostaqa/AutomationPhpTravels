@@ -131,3 +131,4 @@ class AddCustomerPage(object):
 
     def click_submit_button(self):
         self.submit_button.click()
+

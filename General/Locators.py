@@ -3,6 +3,8 @@ __author__ = 'Ricardo Acosta'
 
 class Locators(object):
 
+    # Locators by page
+
     # Login page
     login_title_x = "//h2[contains(string(), 'Login Panel')]"
     login_email_css = "input[type='text'][name='email']"
